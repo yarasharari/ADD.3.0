@@ -1,11 +1,3 @@
-//
-//  Puzzles Page.swift
-//  ADD.3.0
-//
-//  Created by Yara Alsharari on 03/04/1446 AH.
-//
-
-//
 //  Puzzle Page By Nora.swift
 //  ADD.2.0
 //
@@ -191,6 +183,7 @@ struct IQPuzzleGameApp: App {
         WindowGroup {
             PuzzlePage()
         }
+        
     }
 }
 

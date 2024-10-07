@@ -1,15 +1,3 @@
-//
-//  View Answers.swift
-//  ADD.3.0
-//
-//  Created by Yara Alsharari on 03/04/1446 AH.
-////
-//  Yara.swift
-//  ADD
-//
-//  Created by Sahar Otiyn on 26/03/1446 AH.
-//
-
 import SwiftUI
 
 struct viewAnswer: View {
@@ -81,6 +69,7 @@ struct viewAnswer: View {
            
             }
             }
+        
     }
        
  
