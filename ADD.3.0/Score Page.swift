@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ScorePage: View {
-    @State private var score: Int = 0
-   //@Binding private var score: Int
+    //@State private var score: Int = 0
+   @Binding   var score: Int
 
     var body: some View {
         NavigationStack {
@@ -99,6 +99,7 @@ struct AnotherPageView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ScorePage()
+        ScorePage(score: .constant(7))
     }
 }
+
