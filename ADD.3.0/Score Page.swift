@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct ScorePage: View {
-    //@State private var score: Int = 0
-   @Binding   var score: Int
+    @Binding var score: Int
 
     var body: some View {
         NavigationStack {
@@ -18,6 +17,7 @@ struct ScorePage: View {
                 VStack {
                     Spacer()
 
+                    // Display images based on score
                     if score == 0 {
                         Image("0brain")
                             .resizable()
@@ -86,14 +86,7 @@ struct ScorePage: View {
                 }
             }
         }
-    }
-}
-
-struct AnotherPageView: View {
-    var body: some View {
-        Text("Welcome to Another Page!")
-            .font(.largeTitle)
-            .padding()
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -102,4 +95,3 @@ struct ContentView_Previews: PreviewProvider {
         ScorePage(score: .constant(7))
     }
 }
-

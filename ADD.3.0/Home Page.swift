@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct HomePage: View {
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -53,7 +54,7 @@ struct HomePage: View {
                     }
                 }
             }
-            .navigationBarBackButtonHidden(true) 
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
@@ -61,4 +62,3 @@ struct HomePage: View {
 #Preview {
     HomePage()
 }
-

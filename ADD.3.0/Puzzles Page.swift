@@ -1,27 +1,15 @@
-//
-//  Puzzles Page.swift
-//  ADD.3.0
-//
-//  Created by Yara Alsharari on 03/04/1446 AH.
-//
-
-//
-//  Puzzle Page By Nora.swift
-//  ADD.2.0
-//
-//  Created by Nora on 05/10/2024.
-//
-
 import SwiftUI
-// here is state
+
 struct PuzzlePage: View {
     @State private var score: Int = 0
     @State private var currentQuestionIndex = 0
     @State private var selectedAnswer: Int? = nil
-//    @State private var score = 0
     @State private var showResult = false
+    @State private var showingLeaveAlert = false
 
-    // assets to actual images for sahar and shahad
+    @Environment(\.presentationMode) var presentationMode // Dismiss the view
+
+    // Assets to actual images for sahar and shahad
     let questions = [
         Question(pattern: [Image("grn t"), Image("pink c"), Image("prp s"), Image("pink c"), Image("gry s"), Image("grn t"), Image("prp s"), Image("pink s"), Image("?")], options: [Image("gry t"), Image("pink c"), Image("grn s")], correctAnswerIndex: 1),
         Question(pattern: [Image("pink c"), Image("gry t"), Image("prp s"), Image("grn s"), Image("grn t"), Image("gry s"), Image("grn t"), Image("gry c"), Image("?")], options: [Image("pink c"), Image("gry s"), Image("grn s")], correctAnswerIndex: 0),
@@ -49,11 +37,11 @@ struct PuzzlePage: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: geometry.size.width / 3 - 10, height: geometry.size.width / 3 - 10) // q to big squares
-                                    .background(Color.ylw)
+                                    .background(Color.ylw) // Original color
                                     .cornerRadius(10)
                                     .padding(2)
                             } else {
-                                Text("") // placeholder for empty slot
+                                Text("") // Placeholder for empty slot
                                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                                     .background(Color.clear)
                             }
@@ -75,8 +63,8 @@ struct PuzzlePage: View {
                             questions[currentQuestionIndex].options[index]
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 100, height: 100) // answers options to big squares
-                                .background(selectedAnswer == index ? Color.gray : Color.ylw)
+                                .frame(width: 100, height: 100) // Answers options to big squares
+                                .background(selectedAnswer == index ? Color.gray : Color.ylw) // Original color
                                 .foregroundColor(.black)
                                 .cornerRadius(10)
                         }
@@ -87,7 +75,7 @@ struct PuzzlePage: View {
 
                 Spacer()
 
-                // navigation arrows
+                // Navigation arrows
                 HStack {
                     if currentQuestionIndex > 0 {
                         Button(action: {
@@ -101,7 +89,7 @@ struct PuzzlePage: View {
                                 .frame(width: 100, height: 40)
                                 .background(
                                     RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.blu)
+                                        .fill(Color.blu) // Original color
                                         .shadow(color: Color.gray.opacity(0), radius: 10, x: 0, y: 4)
                                         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 1, y: 4)
                                 )
@@ -115,7 +103,7 @@ struct PuzzlePage: View {
                         .frame(width: 100, height: 40)
                         .background(
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.blu)
+                                .fill(Color.blu) // Original color
                                 .shadow(color: Color.gray.opacity(0), radius: 10, x: 0, y: 4)
                                 .shadow(color: Color.black.opacity(0.1), radius: 5, x: 1, y: 4)
                         )
@@ -133,11 +121,16 @@ struct PuzzlePage: View {
                 Text("\(currentQuestionIndex + 1) of \(questions.count)")
                     .font(.headline)
                     .padding()
+
+                // NavigationLink to ScorePage
+                NavigationLink(destination: ScorePage(score: $score), isActive: $showResult) {
+                    EmptyView()
+                }
             }
-            .background(Color.grn)
+            .background(Color.grn) // Original color
             .navigationTitle("")
             .navigationBarItems(leading: Button(action: {
-                // button to leave the game back to home screen
+                showingLeaveAlert = true // Show alert when button is tapped
             }) {
                 Text("**Leave**")
                     .font(.system(size: 20))
@@ -146,16 +139,19 @@ struct PuzzlePage: View {
                     .frame(width: 100, height: 40)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.blu)
+                            .fill(Color.blu) // Original color
                             .shadow(color: Color.gray.opacity(0), radius: 10, x: 0, y: 4)
                             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 1, y: 4)
                     )
             })
-            .alert(isPresented: $showResult) {
-                Alert(title: Text("يودي صفحه جود"),
-                      dismissButton: .default(Text("OK"), action: {
-                          resetGame()
-                      })
+            .alert(isPresented: $showingLeaveAlert) {
+                Alert(
+                    title: Text("Leave Game"),
+                    message: Text("Are you sure you want to leave the game?"),
+                    primaryButton: .destructive(Text("Leave")) {
+                        presentationMode.wrappedValue.dismiss() // Dismiss the current view
+                    },
+                    secondaryButton: .cancel()
                 )
             }
         }
@@ -189,7 +185,7 @@ struct Question {
 struct IQPuzzleGameApp: App {
     var body: some Scene {
         WindowGroup {
-            PuzzlePage()
+            HomePage() // Ensure this is the entry point
         }
     }
 }
