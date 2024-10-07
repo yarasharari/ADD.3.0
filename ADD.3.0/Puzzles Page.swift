@@ -1,3 +1,11 @@
+//
+//  Puzzles Page.swift
+//  ADD.3.0
+//
+//  Created by Yara Alsharari on 03/04/1446 AH.
+//
+
+//
 //  Puzzle Page By Nora.swift
 //  ADD.2.0
 //
@@ -7,10 +15,10 @@
 import SwiftUI
 // here is state
 struct PuzzlePage: View {
-    
+    @State private var score: Int = 0
     @State private var currentQuestionIndex = 0
     @State private var selectedAnswer: Int? = nil
-    @State private var score = 0
+//    @State private var score = 0
     @State private var showResult = false
 
     // assets to actual images for sahar and shahad
@@ -20,11 +28,11 @@ struct PuzzlePage: View {
         Question(pattern: [Image("1"), Image("2"), Image("3"), Image("4"), Image("5"), Image("6"), Image("7"), Image("8"), Image("?")], options: [Image("7"), Image("1"), Image("9")], correctAnswerIndex: 2),
         Question(pattern: [Image("gry t"), Image("gry s"), Image("gry c"), Image("pink t"), Image("pink s"), Image("pink c"), Image("grn t"), Image("grn s"), Image("?")], options: [Image("gry s"), Image("grn c"), Image("pink c")], correctAnswerIndex: 1),
         Question(pattern: [Image("grn c"), Image("gry s"), Image("pink t"), Image("pink s"), Image("grn t"), Image("gry c"), Image("gry t"), Image("pink c"), Image("?")], options: [Image("grn s"), Image("pink c"), Image("gry s")], correctAnswerIndex: 0),
-        Question(pattern: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], options: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], correctAnswerIndex: 0),
-        Question(pattern: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], options: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], correctAnswerIndex: 0),
-        Question(pattern: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], options: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], correctAnswerIndex: 0),
-        Question(pattern: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], options: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], correctAnswerIndex: 2),
-        Question(pattern: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], options: [Image("BabyBrain"), Image("BabyBrain"), Image("BabyBrain")], correctAnswerIndex: 0)
+        Question(pattern: [Image("1"), Image("7"), Image("8"), Image("4"), Image("10"), Image("6"), Image("2"), Image("3"), Image("?")], options: [Image("1"), Image("5"), Image("8")], correctAnswerIndex: 1),
+        Question(pattern: [Image("2"), Image("4"), Image("3"), Image("10"), Image("5"), Image("6"), Image("7"), Image("8"), Image("?")], options: [Image("8"), Image("7"), Image("1")], correctAnswerIndex: 2),
+        Question(pattern: [Image("pink s"), Image("grn c"), Image("gry t"), Image("grn t"), Image("gry s"), Image("pink c"), Image("gry c"), Image("pink t"), Image("?")], options: [Image("pink s"), Image("grn s"), Image("gry t")], correctAnswerIndex: 1),
+        Question(pattern: [Image("grn c"), Image("pink t"), Image("gry s"), Image("grn t"), Image("pink c"), Image("gry t"), Image("grn s"), Image("pink s"), Image("?")], options: [Image("grn s"), Image("pink t"), Image("gry c")], correctAnswerIndex: 2),
+        Question(pattern: [Image("2"), Image("3"), Image("7"), Image("4"), Image("1"), Image("5"), Image("10"), Image("8"), Image("?")], options: [Image("6"), Image("7"), Image("10")], correctAnswerIndex: 0)
     ]
 
     var body: some View {
@@ -183,10 +191,10 @@ struct IQPuzzleGameApp: App {
         WindowGroup {
             PuzzlePage()
         }
-        
     }
 }
 
 #Preview {
     PuzzlePage()
 }
+
