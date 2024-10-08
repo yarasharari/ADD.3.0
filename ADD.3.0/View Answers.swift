@@ -1,93 +1,69 @@
 import SwiftUI
 
-struct viewAnswer: View {
-    var data : [Int] = Array(1...10)
-    
-    let adaptivecolumn = [GridItem(.adaptive(minimum: 150))]
-    let numberColumns = [GridItem(.flexible())]
+struct ViewAnswer: View {
+    @Binding var wrongAnswers: [Bool] // Binding to track wrong answers
+    var data: [Int] = Array(1...10)
+
+    let adaptiveColumn = [GridItem(.adaptive(minimum: 150))]
+
     var body: some View {
-        
-        ZStack{
-            Color(.ylw).ignoresSafeArea()
-            VStack{
-                
-                Spacer()
-                
-                HStack{
+        NavigationStack {
+            ZStack {
+                Color(.ylw).ignoresSafeArea()
+                VStack {
+                    Spacer()
                     
-                    Text("**View Answers**")
-                        .font(.title)
-                        .foregroundColor(Color(.black))
-                        .multilineTextAlignment(.center)
-                        .padding(3.0)
+                    HStack {
+                        Text("**View Answers**")
+                            .font(.title)
+                            .foregroundColor(Color(.black))
+                            .multilineTextAlignment(.center)
+                            .padding(3.0)
+                        
+                        Image("VA")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                    }
                     
-                    Image("VA").resizable().frame(width: 100, height: 100.0)}
-                    VStack{
-                        ScrollView{
-                            
-                            LazyVGrid(columns:adaptivecolumn,spacing:20){
-                                ForEach(data,id: \.self){number in
-                                    ZStack{
+                    VStack {
+                        ScrollView {
+                            LazyVGrid(columns: adaptiveColumn, spacing: 20) {
+                                ForEach(data, id: \.self) { index in
+                                    ZStack {
                                         Rectangle()
                                             .padding(5.0)
-                                            .frame(width: 150,height: 150).foregroundColor(Color(.grn)).cornerRadius(40).shadow(radius: 5)
-                                        Text("\(number)")
-                                            .font(.title).fontWeight(.bold).offset(x:-45,y:-45).foregroundColor(Color(.black))
-                                            
-                                           
-                                            
-                                       
-                                           
-                                        
-                                        
+                                            .frame(width: 150, height: 150)
+                                            .foregroundColor(wrongAnswers[index - 1] ? Color.red : Color(.grn)) // Change color if wrong
+                                            .cornerRadius(40)
+                                            .shadow(radius: 5)
+
+                                        // Display the BabyBrain image
+                                        Image("BabyBrain")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 100, height: 100)
+                                            .offset(y: -10)
+
+                                        Text("\(index)")
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color(.black))
+                                            .offset(y: 40)
                                     }
                                 }
                             }
-                            
-                           
                         }
-                        Button("**Home**") {
-                            
-                        }
-                        .font(.system(size: 20))
-                                                    .foregroundColor(.black)
-                                                    .padding()
-                                                    .frame(width: 100, height: 40)
-                                                    .background(
-                                                        RoundedRectangle(cornerRadius: 20)
-                                                            .fill(Color(.blu))
-                                                            .shadow(color: Color.gray.opacity(0), radius: 10, x: 0, y: 4)
-                                                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 1, y: 4)
-                                                    )
-
+                        
+                        // NavigationLink to existing HomePage
                     }
-               
-                    
-                    
-                
-           
-           
+                }
             }
-            }
-        
-    }
-       
- 
-        
-        
-    
-
-        
-        
-        
-       
-        
-}
-    
-
-struct onboarding : PreviewProvider{
-    static var previews: some View{
-        viewAnswer()
+        }
     }
 }
 
+struct ViewAnswer_Previews: PreviewProvider {
+    static var previews: some View {
+        ViewAnswer(wrongAnswers: .constant(Array(repeating: false, count: 10))) // Provide a default binding for preview
+    }
+}

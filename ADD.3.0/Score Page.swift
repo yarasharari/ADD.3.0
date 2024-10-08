@@ -69,8 +69,24 @@ struct ScorePage: View {
 
                     Spacer()
 
-                    // NavigationLink to another page
-                    NavigationLink(destination: HomePage().navigationBarBackButtonHidden(true)) {
+                    // NavigationLink to View Answers
+                    NavigationLink(destination: ViewAnswer(wrongAnswers: .constant(Array(repeating: false, count: 10))) // Adjust as needed
+                        .navigationBarBackButtonHidden(true)) {
+                        Text("**Answers**")
+                            .font(.system(size: 24))
+                            .foregroundColor(.black)
+                            .padding()
+                            .frame(width: 150, height: 40)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color(red: 230/255, green: 240/255, blue: 245/255))
+                                    .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 4)
+                            )
+                    }
+                    .padding(.bottom, 20)
+
+                    // NavigationLink to Home
+                    NavigationLink(destination: HomePage(score: $score).navigationBarBackButtonHidden(true)) {
                         Text("**Home**")
                             .font(.system(size: 24))
                             .foregroundColor(.black)
@@ -92,6 +108,6 @@ struct ScorePage: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ScorePage(score: .constant(7))
+        ScorePage(score: .constant(10))
     }
 }

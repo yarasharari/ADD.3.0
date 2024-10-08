@@ -1,17 +1,12 @@
-//
-//  ADD_3_0App.swift
-//  ADD.3.0
-//
-//  Created by Yara Alsharari on 03/04/1446 AH.
-//
-
 import SwiftUI
 
 @main
 struct ADD_3_0App: App {
+    @State private var score: Int = 0  // Define the score state variable
+
     var body: some Scene {
         WindowGroup {
-            HomePage()
+            HomePage(score: $score)  // Pass the binding to HomePage
         }
     }
 }
