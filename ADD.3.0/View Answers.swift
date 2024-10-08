@@ -30,7 +30,7 @@ struct ViewAnswer: View {
                                         Rectangle()
                                             .padding(5)
                                             .frame(width: 160, height: 160)
-                                            .foregroundColor(wrongAnswers[index] ? Color.red : Color(.grn)) // Change color if wrong
+                                            .foregroundColor(wrongAnswers[index] ? Color.redd : Color(.grn)) // Change color if wrong
                                             .cornerRadius(40)
                                             .shadow(radius: 5)
 
@@ -38,7 +38,7 @@ struct ViewAnswer: View {
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 120, height: 120)
-                                            .padding(40)
+                                            .padding(40).shadow(radius: 5)
                                         
                                         Circle().fill(Color.grn).frame(width: 50,height: 50).shadow(radius: 5).offset(x:-70,y:-65)
  
