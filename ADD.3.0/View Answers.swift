@@ -2,8 +2,7 @@ import SwiftUI
 
 struct ViewAnswer: View {
     @Binding var wrongAnswers: [Bool] // track wrong answers
-    var score: Int // Property to receive the score
-
+    @Binding var score: Int // Property to receive the score
     var body: some View {
         NavigationStack {
             ZStack {
@@ -37,7 +36,7 @@ struct ViewAnswer: View {
                                         Rectangle()
                                             .padding(5)
                                             .frame(width: 160, height: 160)
-                                            .foregroundColor(wrongAnswers[index] ? Color.redd : Color.grn) // Change color if wrong
+                                            .foregroundColor(wrongAnswers[index] == true ? Color.redd : Color.grn) // Change color if wrong
                                             .cornerRadius(20)
                                             .shadow(radius: 5)
 
@@ -60,20 +59,19 @@ struct ViewAnswer: View {
                         }
                         
                         // Home Button with NavigationLink
-                        NavigationLink(destination: HomePage(score: .constant(0)).navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: HomePage(score: $score).navigationBarBackButtonHidden(true)) {
                             Text("**Home**")
-                                .font(.system(size: 20))
+                                .font(.system(size: 24))
                                 .foregroundColor(.black)
                                 .padding()
                                 .frame(width: 100, height: 40)
                                 .background(
                                     RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.blu)
-                                        .shadow(color: Color.gray.opacity(0), radius: 10, x: 0, y: 4)
-                                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 1, y: 4)
+                                        .fill(Color(red: 230/255, green: 240/255, blue: 245/255))
+                                        .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 4)
                                 )
                         }
-                        .padding(.top, 20) // Add some space above the button
+                        .padding(.bottom, 10)// Add some space above the button
                     }
                 }
                 .padding() // Additional padding for the VStack
@@ -85,6 +83,6 @@ struct ViewAnswer: View {
 
 struct ViewAnswer_Previews: PreviewProvider {
     static var previews: some View {
-        ViewAnswer(wrongAnswers: .constant([false, true, false, true, false, false, true, false, false, true]), score: 6) // Example score and wrong answers
+        ViewAnswer(wrongAnswers : .constant(Array(repeating: false, count: 10)),score: .constant(10))
     }
 }

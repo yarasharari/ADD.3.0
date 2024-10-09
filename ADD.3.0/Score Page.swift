@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ScorePage: View {
     @Binding var score: Int
+    @Binding var wrongAnswers : [Bool]
 
     var body: some View {
         NavigationStack {
@@ -70,7 +71,7 @@ struct ScorePage: View {
                     Spacer()
 
                     // NavigationLink to View Answers
-                    NavigationLink(destination: ViewAnswer(wrongAnswers: .constant(Array(repeating: false, count: 10)), score: score) // Pass score as binding
+                    NavigationLink(destination: ViewAnswer(wrongAnswers: $wrongAnswers, score: $score) // Pass score as binding
                         .navigationBarBackButtonHidden(true)) {
                         Text("**Answers**")
                             .font(.system(size: 24))
@@ -109,6 +110,6 @@ struct ScorePage: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ScorePage(score: .constant(10))
+        ScorePage(score: .constant(10),wrongAnswers : .constant(Array(repeating: false, count: 10)))
     }
 }

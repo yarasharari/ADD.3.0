@@ -69,15 +69,15 @@ struct PuzzlePage: View {
 
     private func questionPatternView() -> some View {
         GeometryReader { geometry in
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 10) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing:10) {
                 ForEach(0..<questions[currentQuestionIndex].pattern.count, id: \.self) { index in
                     questions[currentQuestionIndex].pattern[index]
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: geometry.size.width / 3 - 10, height: geometry.size.width / 3 - 10)
+                        .frame(width: geometry.size.width / 3 - 20, height: geometry.size.width / 3 - 20)
                         .background(Color.ylw)
                         .cornerRadius(10)
-                        .padding(2)
+                        .padding(2).shadow(radius: 5)
                 }
             }
             .padding()
@@ -96,7 +96,7 @@ struct PuzzlePage: View {
                         .frame(width: 100, height: 100)
                         .background(selectedAnswer == index ? Color.gray : Color.ylw)
                         .foregroundColor(.black)
-                        .cornerRadius(10)
+                        .cornerRadius(10).shadow(radius: 5)
                 }
                 .disabled(selectedAnswer != nil)
             }
@@ -116,7 +116,7 @@ struct PuzzlePage: View {
                         .foregroundColor(.black)
                         .padding()
                         .frame(width: 100, height: 40)
-                        .background(RoundedRectangle(cornerRadius: 20).fill(Color.blu))
+                        .background(RoundedRectangle(cornerRadius: 20).fill(Color.blu)).shadow(radius: 5)
                 }
             }
             Spacer()
@@ -125,7 +125,7 @@ struct PuzzlePage: View {
                 .foregroundColor(.black)
                 .padding()
                 .frame(width: 100, height: 40)
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.blu))
+                .background(RoundedRectangle(cornerRadius: 20).fill(Color.blu)).shadow(radius: 5)
                 .onTapGesture {
                     if currentQuestionIndex < questions.count - 1 {
                         currentQuestionIndex += 1
@@ -145,10 +145,10 @@ struct PuzzlePage: View {
     }
 
     private func navigationToScorePage() -> some View {
-        NavigationLink(destination: ScorePage(score: $score), isActive: $showResult) {
-            EmptyView()
+            NavigationLink(destination: ScorePage(score: $score , wrongAnswers: $wrongAnswers), isActive: $showResult) {
+                EmptyView()
+            }
         }
-    }
 
     private func leaveButton() -> some View {
         Button(action: {
@@ -159,7 +159,7 @@ struct PuzzlePage: View {
                 .foregroundColor(.black)
                 .padding()
                 .frame(width: 100, height: 40)
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.blu))
+                .background(RoundedRectangle(cornerRadius: 20).fill(Color.blu)).shadow(radius: 5)
         }
     }
 
