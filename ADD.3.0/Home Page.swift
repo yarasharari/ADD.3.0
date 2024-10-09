@@ -6,18 +6,18 @@ struct HomePage: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(.grn)
+                Color.grn 
                     .edgesIgnoringSafeArea(.all)
 
                 VStack {
                     Rectangle()
-                        .fill(Color(.ylw))
+                        .fill(Color.ylw)
                         .frame(width: 380, height: 500)
                         .cornerRadius(35)
                         .shadow(color: Color.black.opacity(0.5), radius: 5, x: 1, y: 4)
                         .offset(y: -70)
                     Circle()
-                        .fill(Color(.ylw))
+                        .fill(Color.ylw)
                         .blur(radius: 50)
                         .offset(y: 130)
                 }
@@ -51,7 +51,7 @@ struct HomePage: View {
                     Spacer()
 
                     // NavigationLink to PuzzlePage
-                    NavigationLink(destination: PuzzlePage(score: $score).navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: PuzzlePage().navigationBarBackButtonHidden(true)) {
                         Text("**Start**")
                             .font(.system(size: 24))
                             .foregroundColor(.black)
@@ -59,14 +59,16 @@ struct HomePage: View {
                             .frame(width: 100, height: 40)
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(.blu))
+                                    .fill(Color.blu)
                                     .shadow(color: Color.gray.opacity(0), radius: 10, x: 0, y: 4)
                                     .shadow(color: Color.black.opacity(0.1), radius: 5, x: 1, y: 4)
                             )
                     }
+                    .padding(.top, 20) // Add padding above the button
                 }
                 .padding(.top, 10) // Add some padding at the top
             }
+            
             .navigationBarBackButtonHidden(true)
         }
     }
@@ -99,4 +101,3 @@ struct HomePage: View {
 #Preview {
     HomePage(score: .constant(0)) // Provide a default score for preview
 }
-

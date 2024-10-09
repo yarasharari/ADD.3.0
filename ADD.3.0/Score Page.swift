@@ -70,7 +70,7 @@ struct ScorePage: View {
                     Spacer()
 
                     // NavigationLink to View Answers
-                    NavigationLink(destination: ViewAnswer(wrongAnswers: .constant(Array(repeating: false, count: 10))) // Adjust as needed
+                    NavigationLink(destination: ViewAnswer(wrongAnswers: .constant(Array(repeating: false, count: 10)), score: score) // Pass score as binding
                         .navigationBarBackButtonHidden(true)) {
                         Text("**Answers**")
                             .font(.system(size: 24))
@@ -83,6 +83,7 @@ struct ScorePage: View {
                                     .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 4)
                             )
                     }
+
                     .padding(.bottom, 20)
 
                     // NavigationLink to Home
